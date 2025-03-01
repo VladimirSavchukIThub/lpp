@@ -1,4 +1,8 @@
-from sqlalchemy import Column, Integer, String
+import datetime
+
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy.orm import relationship
+
 from app.database import Base
 
 class User(Base):
@@ -13,3 +17,17 @@ class Category(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
+
+    checks = relationship("Check", back_populates="category")
+
+class Check(Base):
+    __tablename__ = "checks"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    sum = Column(Integer, index=True)
+    category_id = Column(Integer, ForeignKey("categories.id"))
+    date = Column(DateTime)
+    description = Column(String, index=True)
+
+    category = relationship("Category", back_populates="checks")

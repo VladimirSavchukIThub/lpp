@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 from unicodedata import category
 
 from app.database import SessionLocal
-from app.crud import create_user, create_category
-from app.schemas import UserCreate, CategoryCreate
+from app.crud import create_category
+from app.schemas import CategoryCreate
 
 router = APIRouter()
 
